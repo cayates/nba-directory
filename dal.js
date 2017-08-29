@@ -23,15 +23,21 @@ function getPlayerByNickname (nickname) {
   })
 }
 
-function addPlayer (newPlayer) {
-  const player = new Players({newPlayer})
-  newPlayer.save(function (err) {
-    console.log(err)
-    return player
-    console.log(addPlayer)
+function addPlayer (name, position, teams, nickname, titles, avatar, username, password){
+  Players.create({name: name, position: position, teams: teams, nickname: nickname, titles: titles, avatar: avatar, username: username, password: password}, function (err, Players){
+    if (err) return handleError(err)
   })
-  return Promise.resolve('success')
 }
+
+// function addPlayer (newPlayer) {
+//   const player = new Players({newPlayer})
+//   newPlayer.save(function (err) {
+//     console.log(err)
+//     return player
+//     console.log(addPlayer)
+//   })
+//   return Promise.resolve('success')
+// }
 
 function deletePlayer (playerId) {
   return player.deleteOne({ _id: personId })

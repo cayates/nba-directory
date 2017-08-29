@@ -39,8 +39,8 @@ app.get ('/singleplayer', function (req, res){
   res.render('singleplayer')
 })
 
-app.post ('/players', function (req, res){
-  playersdal.addPlayer(req.body.name);
+app.post ('/players', (req, res) =>{
+  playersdal.addPlayer(req.body.name, req.body.position, req.body.teams, req.body.nickname, req.body.titles, req.body.avatar, req.body.username, req.body.password);
   res.redirect('./players')
 })
 
