@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const Players = require('./model')
 mongoose.Promise = require('bluebird')
 const url = 'mongodb://localhost:27017/nbaplayersdb'
-// const playerModel = mongoose.model('nbaplayers', playerSchema);
 
 mongoose.connect('mongodb://localhost:27017/nbaplayersdb', {
   useMongoClient: true
@@ -25,20 +24,27 @@ function addPlayer (name, position, teams, nickname, titles, avatar, username, p
 }
 
 function deletePlayer (playerId) {
-  return Players.deleteOne({'_id': playerId}).catch(function(err){
+  Players.deleteOne({'_id': playerId}).catch(function(err){
     console.log(err)    
   })
 }
 
-function editPlayer (name, position, teams, nickname, titles, avatar, username, password){
-  Players.updateOne(
-    {$set: {"Name": name, "Position": position, "Teams": teams, "Nickname": nickname, "Titles": titles, "Avatar": avatar, "Username": username, "Password": password}}, function (err, Players){
-      if (err){
-        console.log(err)
-        console.log(updateOne)
-      }
-    }
-  )
+function editPlayer (playerId){
+  Players.update({'id': playerId}).catch(function(err){
+    console.log(err)
+  })
 }
 
-module.exports = {getAllPlayers: getAllPlayers, addPlayer: addPlayer, deletePlayer: deletePlayer, getPlayerById: getPlayerById, editPlayer: editPlayer }
+
+// function editPlayer (name, position, teams, nickname, titles, avatar, username, password){
+//   Players.updateOne(
+//     {$set: {"Name": name, "Position": position, "Teams": teams, "Nickname": nickname, "Titles": titles, "Avatar": avatar, "Username": username, "Password": password}}, function (err, Players){
+//       if (err){
+//         console.log(err)
+//         console.log(updateOne)
+//       }
+//     }
+//   )
+// }
+
+module.exports = {getAllPlayers: getAllPlayers, addPlayer: addPlayer, deletePlayer: deletePlayer, getPlayerById: getPlayerById, editPlayer: editPlayer}

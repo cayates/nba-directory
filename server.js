@@ -47,10 +47,19 @@ app.post ('/players', (req, res) =>{
   console.log('------------------------------------')  
 })
 
-app.get('/editplayer', function (req, res){
-  playersdal.editPlayer(req.body.name, req.body.position, req.body.teams, req.body.nickname, req.body.titles, req.body.avatar, req.body.username, req.body.password);
+// ----------------------------------------- //
+
+app.get('/editplayer/:id', (req, res) => {
+  playersdal.editPlayer(req.params.id)
+    res.render('editplayer')
+  })
+
+app.post('/editplayer/:id', (req, res) =>{
+  playersdal.editPlayer(req.params.id)
   res.redirect('./players')
 })
+
+// ----------------------------------------- //
 
 app.get('/singleplayer/:id', (req, res) => {
   playersdal.getPlayerById(req.params.id).then(function(playersLoad){
@@ -64,23 +73,8 @@ app.get('/deleteplayer/:id', (req, res) => {
     res.render('./players')
   })
 
-app.delete('/deleteplayer/:id', (req, res) =>{
+app.post('/deleteplayer/:id', (req, res) =>{
   playersdal.deletePlayer(req.params.id)
-    res.redirect('/players')
+    res.redirect('/players')    
   })
 
-// app.post('/deleteplayer/:id', (req, res) => {
-//   playersdal.deletePlayer(req.params.id).then(function(deletingPlayer){
-//   res.render('players', {deletingPlayer})
-// })
-// })
-
-// app.get('/delete/:id', (req, res) => {
-//   playersdal.deletePlayer(req.params.id).then(function(deletingPlayer){
-//     res.render('./players', {deletingPlayer})
-//   })
-// })
-
-app.post('/editplayer', (req, res)=>{
-  res.render('editplayer')
-})

@@ -11,10 +11,11 @@
         <h3>Team(s): {{teams}}</h3>
     </div>
 </div>
-{{/playersLoad}}
-    <form class = "deletePlayerForm" action="/deleteplayer/:id" method="delete">          
+    <form class = "deletePlayerForm" action="/deleteplayer/{{id}}" method="POST">          
         <input type="submit" name="_id" value="Delete Player"> 
     </form>      
-    <form class = "editPlayerForm" action="/editplayer" method="POST">  
-        <input type="submit" name="editPlayer" value="Edit Player">   
-    </form>  
+    <form class = "editPlayerForm" action="/editplayer/{{id}}" method="POST">  
+        <input type="submit" name="_id" value="Edit Player">   
+    </form> 
+{{/playersLoad}}
+    
