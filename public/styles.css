@@ -1,9 +1,12 @@
 body {
     background-color: lightcoral;
     text-align: center;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 .playersCards {
     display: flex;
+    flex-wrap: wrap;
 }
 .playerinfo{
     margin: 15px;

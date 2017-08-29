@@ -20,6 +20,10 @@ app.listen(app.get('port'), function () {
     console.log('App is running on Andre 3000.')
   })
 
+app.get ('/', function (req, res){
+  res.redirect('players')
+})
+
 app.get ('/addplayer', function (req, res){
   res.render('addplayer')
 })
@@ -31,21 +35,20 @@ app.get ('/players', function (req, res){
   })
 })
 
-app.get ('/', function (req, res){
-  res.redirect('players')
-})
-
 app.get ('/singleplayer', function (req, res){
   res.render('singleplayer')
 })
 
 app.post ('/players', function (req, res){
+  playersdal.addPlayer(req.body.name);
   res.redirect('./players')
 })
 
-app.post ('/addplayer', function (req, res){
-  const addNewPlayer = playersdal.addPlayer().then(function(newPlayer){
-    res.render('players', { playersLoad })
-    console.log(addNewPlayer)
-  })
-})
+// attempt at adding post to database
+
+// app.post ('/addplayer', function (req, res){
+//   const addNewPlayer = playersdal.addPlayer().then(function(newPlayer){
+//     res.render('players', { playersLoad })
+//     console.log(addNewPlayer)
+//   })
+// })

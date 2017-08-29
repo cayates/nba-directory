@@ -24,11 +24,11 @@ function getPlayerByNickname (nickname) {
 }
 
 function addPlayer (newPlayer) {
-  const player = new Player(newPlayer)
-  player.save(function (err) {
+  const player = new Players({newPlayer})
+  newPlayer.save(function (err) {
     console.log(err)
     return player
-    console.log(addPlayer())
+    console.log(addPlayer)
   })
   return Promise.resolve('success')
 }
