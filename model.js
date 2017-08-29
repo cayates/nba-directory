@@ -15,7 +15,7 @@ playerSchema.statics.findByName = function (name, cb) {
     return this.find({ name: name })
   }
   
-  const Players = mongoose.model('nbaplayers', playerSchema)
-  // console.log(Players);
-  module.exports = Players
+const Players = mongoose.model('nbaplayers', playerSchema)
+
+module.exports = Players
 

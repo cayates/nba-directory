@@ -42,28 +42,45 @@ app.get ('/singleplayer', function (req, res){
 app.post ('/players', (req, res) =>{
   playersdal.addPlayer(req.body.name, req.body.position, req.body.teams, req.body.nickname, req.body.titles, req.body.avatar, req.body.username, req.body.password);
   res.redirect('./players')
-})
-
-app.delete('/delete/:id', (req, res) => {
-  playersdal.deletePlayer(req.params.id);
-  res.redirect('/players');
+  console.log('------------------------------------')
+  console.log(Players)
+  console.log('------------------------------------')  
 })
 
 app.get('/editplayer', function (req, res){
-  res.render('editplayer')
+  playersdal.editPlayer(req.body.name, req.body.position, req.body.teams, req.body.nickname, req.body.titles, req.body.avatar, req.body.username, req.body.password);
+  res.redirect('./players')
 })
+
+app.get('/singleplayer/:id', (req, res) => {
+  playersdal.getPlayerById(req.params.id).then(function(playersLoad){
+    res.render('./singleplayer', {playersLoad})
+    console.log(playersLoad);
+  })
+})
+
+app.get('/deleteplayer/:id', (req, res) => {
+  playersdal.deletePlayer(req.params.id)
+    res.render('./players')
+  })
+
+app.delete('/deleteplayer/:id', (req, res) =>{
+  playersdal.deletePlayer(req.params.id)
+    res.redirect('/players')
+  })
+
+// app.post('/deleteplayer/:id', (req, res) => {
+//   playersdal.deletePlayer(req.params.id).then(function(deletingPlayer){
+//   res.render('players', {deletingPlayer})
+// })
+// })
+
+// app.get('/delete/:id', (req, res) => {
+//   playersdal.deletePlayer(req.params.id).then(function(deletingPlayer){
+//     res.render('./players', {deletingPlayer})
+//   })
+// })
 
 app.post('/editplayer', (req, res)=>{
   res.render('editplayer')
 })
-
-// app.get('/editplayer/:id', (req, res) => {
-//   dal.getPlayerById(req.params.id).then( (Players) => {
-//     res.render('edit', { Players: Players })
-//   })
-// })
-
-// app.post('/editplayer/:id', (req, res) => {
-//   dal.editPlayer(req.body.name, req.body.position, req.body.teams, req.body.nickname, req.body.titles, req.body.avatar, req.body.username, req.body.password)
-//     res.redirect('./players' + req.params.id);
-// })
