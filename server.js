@@ -44,11 +44,26 @@ app.post ('/players', (req, res) =>{
   res.redirect('./players')
 })
 
-// attempt at adding post to database
+app.delete('/delete/:id', (req, res) => {
+  playersdal.deletePlayer(req.params.id);
+  res.redirect('/players');
+})
 
-// app.post ('/addplayer', function (req, res){
-//   const addNewPlayer = playersdal.addPlayer().then(function(newPlayer){
-//     res.render('players', { playersLoad })
-//     console.log(addNewPlayer)
+app.get('/editplayer', function (req, res){
+  res.render('editplayer')
+})
+
+app.post('/editplayer', (req, res)=>{
+  res.render('editplayer')
+})
+
+// app.get('/editplayer/:id', (req, res) => {
+//   dal.getPlayerById(req.params.id).then( (Players) => {
+//     res.render('edit', { Players: Players })
 //   })
+// })
+
+// app.post('/editplayer/:id', (req, res) => {
+//   dal.editPlayer(req.body.name, req.body.position, req.body.teams, req.body.nickname, req.body.titles, req.body.avatar, req.body.username, req.body.password)
+//     res.redirect('./players' + req.params.id);
 // })

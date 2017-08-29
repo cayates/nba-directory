@@ -16,6 +16,12 @@
         <p>{{position}}</p>
         <p>{{teams}}</p>
         <img src = {{avatar}}>
+        <form class = "deletePlayerForm" action="/players" method="POST">          
+          <input type="submit" name="deletePlayer" value="Delete Player"> 
+        </form>      
+        <form class = "editPlayerForm" action="/editplayer" method="POST">                    
+          <input type="submit" name="editPlayer" value="Edit Player">   
+        </form>         
         </div>
       {{/playersLoad}}
     </div>

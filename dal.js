@@ -11,6 +11,10 @@ function getAllPlayers () {
   return Players.find()
 }
 
+function getPlayerById(playerId){
+  return Players.findOne({Number: playerId})
+}
+
 function getPlayer (personId) {
   return player.find({ _id: playerId }).catch(function (err) {
     console.log(err)
@@ -29,18 +33,20 @@ function addPlayer (name, position, teams, nickname, titles, avatar, username, p
   })
 }
 
-// function addPlayer (newPlayer) {
-//   const player = new Players({newPlayer})
-//   newPlayer.save(function (err) {
-//     console.log(err)
-//     return player
-//     console.log(addPlayer)
-//   })
-//   return Promise.resolve('success')
-// }
-
 function deletePlayer (playerId) {
-  return player.deleteOne({ _id: personId })
+  Players.deleteOne({ Number: id })
+  console.log(deletePlayer)
 }
 
-module.exports = {getAllPlayers: getAllPlayers, getPlayer: getPlayer, getPlayerByNickname: getPlayerByNickname, addPlayer: addPlayer }
+// function editPlayer (playerId)
+//   Players.updateOne(
+//     {Number: id},
+//     {$set: {name: name, position: position, teams: teams, nickname: nickname, titles: titles, avatar: avatar, username: username, password: password}}, function (err, placeholder){
+//       if (err){
+//         console.log(err)
+//       }
+//     }
+//   )
+
+
+module.exports = {getAllPlayers: getAllPlayers, getPlayer: getPlayer, getPlayerByNickname: getPlayerByNickname, addPlayer: addPlayer, deletePlayer: deletePlayer, getPlayerById: getPlayerById }
