@@ -29,12 +29,12 @@ function deletePlayer (playerId) {
   })
 }
 
-function editPlayer (playerId){
-  Players.update({'id': playerId}).catch(function(err){
-    console.log(err)
-  })
+function editPlayer (name, position, teams, nickname, titles, avatar, username, password){
+  Players.updateOne(
+    {$set: {name: name, position: position, teams: teams, nickname: nickname, titles: titles, avatar: avatar, username: username, password: password}}, function (err, Players){
+    }
+  )
 }
-
 
 // function editPlayer (name, position, teams, nickname, titles, avatar, username, password){
 //   Players.updateOne(

@@ -7,6 +7,7 @@ body {
 .playerinfo {
     display: flex;
     flex-wrap: wrap;
+    border-style: double;
 }
 .playersCards {
     display: flex;
