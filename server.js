@@ -66,19 +66,36 @@ app.post ('/players', (req, res) =>{
 // ----------------------------------------- //
 
 app.get('/editplayer/:id', (req, res) => {
-  playersdal.editPlayer(req.params.id)
-    res.render('./editplayer')
+  const editPlayerCard = playersdal.getPlayerById(req.params.id).then(function(playersLoad){
+    res.render('./editplayer', { playersLoad })    
+  })
   })
 
-// app.get('/editplayer/:id', (req, res) => {
-//   playersdal.editPlayer(req.params.id)
-//     res.render('editplayer', {id: req.params.id})
-//   })
-
-app.post('/editplayer/:id', (req, res) =>{
-  playersdal.editPlayer(req.params.id)
+  app.post('/editplayer/:id', (req, res) =>{
+    
+    playersdal.editPlayer(req.params.id, req.body)
     res.redirect('/players')
-})
+  })
+
+// app.post('/editplayer/:id', (req, res) =>{
+//   const updatedPlayer = (req.body.name, req.body.position, req.body.teams, req.body.nickname, req.body.titles, req.body.avatar, req.body.username, req.body.password);  
+//   playersdal.editPlayer(req.params.id, updatedPlayer)
+//     res.redirect('/players')
+// })
+
+// app.post('/edit',(req, res) => {
+//   db.collection('blogs').update ({ _id: ObjectId(req.body._id) }, {$set: {
+//      title: req.body.title,
+//      description: req.body.description
+//   }
+//   }, function (err, result) {
+//        if (err) {
+//        console.log(err);
+//      } else {
+//       console.log("Post Updated successfully");
+//       res.render('blog.ejs');
+//   }
+//  });
 
 // ----------------------------------------- //
 
